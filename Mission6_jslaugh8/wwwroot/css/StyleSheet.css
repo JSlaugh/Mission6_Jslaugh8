@@ -1,0 +1,10 @@
+﻿form {
+    display:grid;
+    max-width:80%;
+    margin:auto;
+}
+
+label{
+margin-bottom:0px;
+margin-top:8px;
+}
