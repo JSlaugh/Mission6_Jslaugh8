@@ -9,7 +9,7 @@ using Mission6_jslaugh8.Models;
 namespace Mission6_jslaugh8.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230214021800_Initial")]
+    [Migration("20230217055825_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,15 +18,14 @@ namespace Mission6_jslaugh8.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
-            modelBuilder.Entity("Mission6_jslaugh8.Models.FormResponse", b =>
+            modelBuilder.Entity("Mission6_jslaugh8.Models.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -56,13 +55,15 @@ namespace Mission6_jslaugh8.Migrations
 
                     b.HasKey("MovieId");
 
-                    b.ToTable("responses");
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Romance/Drama",
+                            CategoryId = 1,
                             Director = "Baz Luhrmann",
                             Edited = false,
                             LentTo = "",
@@ -74,7 +75,7 @@ namespace Mission6_jslaugh8.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Family/Drama",
+                            CategoryId = 2,
                             Director = "Lasse Hallström",
                             Edited = false,
                             LentTo = "",
@@ -86,7 +87,7 @@ namespace Mission6_jslaugh8.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Sci-fi/Action",
+                            CategoryId = 3,
                             Director = "Andrew Stanton",
                             Edited = true,
                             LentTo = "",
@@ -95,6 +96,47 @@ namespace Mission6_jslaugh8.Migrations
                             Title = "John Carter",
                             Year = 2012
                         });
+                });
+
+            modelBuilder.Entity("Mission6_jslaugh8.Models.MovieCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Romance/Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Family/Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Sci-fi/Action"
+                        });
+                });
+
+            modelBuilder.Entity("Mission6_jslaugh8.Models.Movie", b =>
+                {
+                    b.HasOne("Mission6_jslaugh8.Models.MovieCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

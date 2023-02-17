@@ -14,11 +14,11 @@ namespace Mission6_jslaugh8.Controllers
     {
         private readonly ILogger<FormController> _logger;
 
-        private MovieContext _formContext { get; set; }
+        private MovieContext _movieContext { get; set; }
         public FormController(ILogger<FormController> logger,MovieContext movieContext )
         {
             _logger = logger;
-            _formContext = movieContext;
+            _movieContext = movieContext;
 
         }
 
@@ -31,13 +31,13 @@ namespace Mission6_jslaugh8.Controllers
 
         [HttpPost]
 
-        public IActionResult Index(FormResponse ar) 
+        public IActionResult Index(Movie ar) 
         {
 
             if (ModelState.IsValid)
             {
-                _formContext.Add(ar);
-                _formContext.SaveChanges();
+                _movieContext.Add(ar);
+                _movieContext.SaveChanges();
                 return View("Confirmation",ar);
             }
             else

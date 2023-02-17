@@ -15,16 +15,38 @@ namespace Mission6_jslaugh8.Models
 
         }
 
-        // Declaring which model we are working with
-        public DbSet<FormResponse> responses { get; set; }
+        // Setting up the Movies Database
+        public DbSet<Movie> Movies { get; set; }
+        //Creating of the Category Database
+        public DbSet<MovieCategory> Category { get; set; }
 
+        //Seed data
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            mb.Entity<FormResponse>().HasData(
-                new FormResponse
+            //Seed Data for Categories
+            mb.Entity<MovieCategory>().HasData(
+                new MovieCategory
+                {
+                    CategoryId = 1,
+                    CategoryName = "Romance/Drama",
+                },
+                new MovieCategory
+                {
+                    CategoryId = 2,
+                    CategoryName = "Family/Drama",
+                },
+                new MovieCategory
+                {
+                    CategoryId = 3,
+                    CategoryName = "Sci-fi/Action",
+                }
+                );
+            //Seed data for Movies
+            mb.Entity<Movie>().HasData(
+                new Movie
                 {
                     MovieId = 1,
-                    Category = "Romance/Drama",
+                    CategoryId = 1,
                     Title = "The Great Gatsby",
                     Year = 2013,
                     Director = "Baz Luhrmann",
@@ -34,10 +56,10 @@ namespace Mission6_jslaugh8.Models
                     Notes = "",
 
                 },
-                new FormResponse
+                new Movie
                 {
                     MovieId = 2,
-                    Category = "Family/Drama",
+                    CategoryId = 2,
                     Title = "A Dog's Purpose",
                     Year = 2017,
                     Director = "Lasse Hallström",
@@ -46,10 +68,10 @@ namespace Mission6_jslaugh8.Models
                     LentTo = "",
                     Notes = "",
                 },
-                new FormResponse
+                new Movie
                 {
                     MovieId = 3,
-                    Category = "Sci-fi/Action",
+                    CategoryId = 3,
                     Title = "John Carter",
                     Year = 2012,
                     Director = "Andrew Stanton",
@@ -59,7 +81,11 @@ namespace Mission6_jslaugh8.Models
                     Notes = "",
                 }
                 );
+
         }
+
+
+
 
 
     }

@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace Mission6_jslaugh8.Models
 {
-    public class FormResponse
+    public class Movie
     {
         [Key]
         [Required]
         public int MovieId { get; set; }
         [Required(ErrorMessage = "You must enter a category name like Sci-fi")]
         [Display(Name = "Category")]
-        public string Category { get; set; }
 
-        [Required(ErrorMessage = "You must enter a Title name like The Martian")]
-        [Display(Name = "Category")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "The field Year must be greater than 1850")]
@@ -28,7 +25,7 @@ namespace Mission6_jslaugh8.Models
         [Display(Name = "Director")]
         public string Director { get; set; }
         [Required(ErrorMessage = "You must enter a Rating from the dropdown menu")]
-        [Display(Name = "Director")]
+        [Display(Name = "Rating")]
         public string Rating { get; set; }
 
         public bool Edited { get; set; }
@@ -36,5 +33,10 @@ namespace Mission6_jslaugh8.Models
         public string LentTo { get; set; }
         [StringLength(25,ErrorMessage ="You are limited to 25 characters")]
         public string Notes { get; set; }
+   
+        
+        //Build Foreign Key Relationship
+        public int CategoryId { get; set; }
+        public MovieCategory Category { get; set; }
     }
 }
