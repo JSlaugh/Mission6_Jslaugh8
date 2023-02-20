@@ -3,21 +3,30 @@
     ViewData["Title"] = "Form";
 }
 
-@model Mission6_jslaugh8.Models.Movie
+@model Mission6_jslaugh8.Models.Movie;
 
 <h1 class="card-title">Form</h1>
 
 <h2 class="card-subtitle">Fill out this form to add a new movie to the database</h2>
-<form method="post">
+<form class="card" method="post">
 
-    <label for="Category">Category</label><input id="Category" type="text" name="Category" />
-    <label for="Title">Title</label><input id="Title" type="text" name="Title" />
-    <label for="Year">Year</label><input id="Year" type="number" name="Year" min="1850" step="1" />
-    <label for="Director">Director</label><input id="Director" type="text" name="Director" />
+    <label asp-for="CategoryId">Category</label>
+    <select asp-for="CategoryId">
+        <option value="">Select a category</option>
+        @foreach (MovieCategory category in ViewBag.Categories)
+        {
+            <option value="@category.CategoryId">@category.CategoryName</option>
+        }
+
+    </select>
+
+    <label asp-for="Title">Title</label><input asp-for="Title"/>
+    <label asp-for="Year">Year</label><input asp-for="Year" min="1850" step="1" />
+    <label asp-for="Director">Director</label><input asp-for="Director" />
 
     <!--Raing Dropdown-->
-    <label for="Rating">Rating</label>
-    <select id="Rating" name="Rating">
+    <label asp-for="Rating">Rating</label>
+    <select asp-for="Rating">
         <option value="G">G</option>
         <option value="PG">PG</option>
         <option value="PG-13">PG-13</option>
@@ -25,16 +34,16 @@
     </select>
 
     <!--Radio Button Section for Edit-->
-    
+
     <fieldset style="border:0; margin-top:5px;">
         <legend>Edited</legend>
-        <label for="True">True</label><input id="True" type="radio" name="Edited" value="true" />
-        <label for="False">False</label><input id="False" type="radio" name="Edited" value="false" />
+        <label asp-for="Edited">True</label><input asp-for="Edited" type="radio" value="true" />
+        <label asp-for="Edited">False</label><input asp-for="Edited" type="radio" value="false" />
     </fieldset>
     <!--A name of a person probably string-->
-    <label for="LentTo">Lent To</label><input id="LentTo" type="text" name="LentTo" />
+    <label asp-for="LentTo">Lent To</label><input asp-for="LentTo" />
     <!-- Notes limit 25 -->
-    <label for="Notes">Notes</label><input id="Notes" type="text" name="Notes" />
+    <label asp-for="Notes">Notes</label><input asp-for="Notes"/>
     <br />
     <button type="submit">Submit</button>
 

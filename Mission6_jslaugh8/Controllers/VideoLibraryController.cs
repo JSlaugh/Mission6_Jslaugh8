@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mission6_jslaugh8.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mission6_jslaugh8.Controllers
 {
@@ -22,7 +23,7 @@ namespace Mission6_jslaugh8.Controllers
         }
         public IActionResult Index()
         {
-            var movies = _movieContext.Movies
+            var movies = _movieContext.Movies.Include(x => x.Category)
                 .OrderBy(movie =>movie.Year)
                 .ToList();
 

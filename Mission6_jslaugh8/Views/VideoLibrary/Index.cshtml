@@ -26,7 +26,7 @@
             {
         <tr>
             <td>@movie.MovieId</td>
-            <td>@movie.CategoryId</td>
+            <td>@movie.Category.CategoryName</td>
             <td>@movie.Title</td>
             <td>@movie.Year</td>
             <td>@movie.Director</td>
@@ -34,7 +34,12 @@
             <td>@movie.Edited</td>
             <td>@movie.LentTo</td>
             <td>@movie.Notes</td>
-            <td>bob</td>
+            <td>
+                <a asp-controller="Form" asp-action="Edit" asp-route-movieid="@movie.MovieId" class="text-white">Edit</a>
+                <a asp-controller="Form" asp-action="Delete" asp-route-movieid="@movie.MovieId" class="text-white">Delete</a>
+                
+            </td>
+
         </tr>
             }
     </tbody>
